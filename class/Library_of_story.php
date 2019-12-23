@@ -9,7 +9,7 @@ class Library_of_story
     
     public function __construct()
     {
-        $data = new DBConnect("mysql:host=127.0.0.1;dbname=Library", "root", "1037212a");
+        $data = new DBConnect("mysql:host=127.0.0.1;dbname=Library_crud", "root", "1037212a");
         $this->connect = $data->connect();
     }
     
@@ -34,7 +34,7 @@ class Library_of_story
     
     public function addLibrary($story)
     {
-        $stmt = $this->connect->prepare("INSERT INTO Library(name,author,category,image) VALUES(:name ,:author,:category,:image)");
+        $stmt = $this->connect->prepare("INSERT INTO Library_crud(name,author,category,image) VALUES(:name ,:author,:category,:image)");
         $stmt->bindParam(":name", $story->getName());
         $stmt->bindParam(":author", $story->getAuthor());
         $stmt->bindParam(":category", $story->getCategory());
@@ -44,14 +44,14 @@ class Library_of_story
     
     public function deleteLibrary($id)
     {
-        $stmt = $this->connect->prepare("DELETE FROM Library WHERE id=:id");
+        $stmt = $this->connect->prepare("DELETE FROM Library_crud WHERE id=:id");
         $stmt->bindParam(":id", $id);
         $stmt->execute();
     }
     
     public function editLibrary($id)
     {
-        $stmt = $this->connect->prepare("SELECT name,author,category,image FROM Library WHERE id=:id");
+        $stmt = $this->connect->prepare("SELECT name,author,category,image FROM Library_crud WHERE id=:id");
         $stmt->bindParam(":id", $id);
         $stmt->execute();
         return $stmt->fetch();
@@ -59,7 +59,7 @@ class Library_of_story
     
     public function updateLibrary($id, $Story)
     {
-        $stmt = $this->connect->prepare("UPDATE Library SET name=:name,author=:author,category=:category,image=:image WHERE id=:id");
+        $stmt = $this->connect->prepare("UPDATE Library_crud SET name=:name,author=:author,category=:category,image=:image WHERE id=:id");
         $stmt->bindParam(":name", $Story->getName());
         $stmt->bindParam(":author", $Story->getAuthor());
         $stmt->bindParam(":category", $Story->getCategory());
